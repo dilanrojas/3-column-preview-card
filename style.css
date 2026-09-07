@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&display=swap');
 
 :root {
-  --br-orange: hsl(31, 77%, 52%);
-  --dk-cyan: hsl(184, 100%, 22%);
-  --v-dk-cyan: hsl(179, 100%, 13%);
+  --orange: hsl(31, 77%, 52%);
+  --cyan: hsl(184, 100%, 22%);
+  --v-cyan: hsl(179, 100%, 13%);
 
   --tp-white: hsla(0, 0%, 100%, 0.75);
   --v-lg-gray: hsl(0, 0%, 95%);
@@ -32,7 +32,12 @@ svg {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1;
   font-family: var(--ff-heading);
   text-transform: uppercase;
@@ -60,56 +65,55 @@ body {
 }
 
 /* Contents */
-.columns-wrapper {
+.container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 440px 350px;
+  grid-template-areas:
+    "sedans sedans suvs"
+    "luxury luxury luxury"
+  ;
+
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.column {
+.item {
+  --bg-item: rbg(45 45 45 / 1);
+
   display: flex;
   flex-direction: column;
-  min-height: 485px;
+  min-height: fit-content;
   padding: 3rem;
   gap: 2.3em;
+
+  background: var(--bg-item);
+
+  & button {
+    color: var(--bg-item);
+  }
 }
 
-.column:nth-child(1) {
-  --bg-cl-1: var(--br-orange);
-
-  border-radius: 10px 0px 0px 10px;
-  background-color: var(--bg-cl-1);
+.item:first-child {
+  --bg-item: var(--orange);
+  grid-area: sedans
 }
 
-.column:nth-child(1) button {
-  color: var(--bg-cl-1);
+.item:nth-child(2) {
+  --bg-item: var(--cyan);
+  grid-area: suvs;
 }
 
-.column:nth-child(2) {
-  --bg-cl-2: var(--dk-cyan);
-
-  background-color: var(--bg-cl-2);
+.item:last-child {
+  --bg-item: var(--v-cyan);
+  grid-area: luxury;
 }
 
-.column:nth-child(2) button {
-  color: var(--bg-cl-2);
-}
-
-.column:nth-child(3) {
-  --bg-cl-3: var(--v-dk-cyan);
-
-  background-color: var(--v-dk-cyan);
-  border-radius: 0px 10px 10px 0px;
-}
-
-.column:nth-child(3) button {
-  color: var(--v-dk-cyan);
-}
-
-.column img {
+.item img {
   width: 64px;
 }
 
-.column button {
+.item button {
   cursor: pointer;
   margin-top: auto;
   background-color: var(--v-lg-gray);
@@ -119,44 +123,45 @@ body {
   text-wrap: nowrap;
   width: fit-content;
   transition: background-color .15s ease,
-              color .15s ease;
+    color .15s ease;
 }
 
-.column button:hover {
+.item button:hover {
   background-color: transparent;
   color: var(--v-lg-gray);
 }
 
-.column h1 {
+.item h1 {
   margin-bottom: .8em;
   font-size: 2.5em;
   color: var(--v-lg-gray)
 }
 
-.column p {
+.item p {
   color: var(--tp-white);
+  max-width: 50ch;
 }
 
-@media(width <= 750px) {
-  .columns-wrapper {
+@media(width <=750px) {
+  .container {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .column {
+  .item {
     min-height: 350px;
   }
 
-  .column:nth-child(1) {
+  .item:nth-child(1) {
     border-radius: 10px 10px 0px 0px;
   }
 
-  .column:nth-child(3) {
+  .item:nth-child(3) {
     border-radius: 0px 0px 10px 10px;
   }
 }
 
 /* Utility classes */
-.container {
+.wrapper {
   --width: 900px;
   --padding: 1rem;
 
